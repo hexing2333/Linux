@@ -1,0 +1,6 @@
+cat beijing.html | sed -e 's/<[^<>]*>/ /g' -e 's/[年月]/-/g'| awk -f flow.awk | sed -e 's/μg.m³/ /g' -e 's/[更新：日]//g' -e 's/时/:00:00/g' |more
+
+/更新：/{date=$1;time=$2;}
+/m³/{
+        printf("%s %s,%s,%s\n",date,time,$1,$3);
+}
